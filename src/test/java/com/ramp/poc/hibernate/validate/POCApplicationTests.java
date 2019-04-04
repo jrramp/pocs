@@ -67,9 +67,31 @@ public class POCApplicationTests {
     @Test
     public void testToVerifyValidatorInvokedForParameterAndNoException() {
         Person p = new Person();
+        Address address = new Address();
+        address.setZipCode(12345);
+        p.setAddress(address);
         p.setFirstName("test");
         String uuid = personHandler.setPerson(p);
         personHandler.getPerson(uuid);
+
+    }
+
+
+    @Test(expected = ConstraintViolationException.class)
+    public void testValidationFailOnAddressElement() {
+        try {
+            Person p = new Person();
+            Address address = new Address();
+            // zipcode is required not null field. Not setting
+            p.setAddress(address);
+            p.setFirstName("test");
+            String uuid = personHandler.setPerson(p);
+            personHandler.getPerson(uuid);
+
+        } catch (ConstraintViolationException e) {
+            e.printStackTrace();
+            throw e;
+        }
 
     }
 

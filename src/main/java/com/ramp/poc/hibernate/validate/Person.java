@@ -20,6 +20,21 @@ public class Person {
     @JsonProperty
     private String lastName;
 
+
+    @Valid
+    @JsonProperty
+    private Address address;
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+
+
     public String getFirstName() {
         return firstName;
     }
@@ -43,4 +58,6 @@ public class Person {
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
+
+
 }
